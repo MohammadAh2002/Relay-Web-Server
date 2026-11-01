@@ -42,6 +42,12 @@ impl ThreadPool {
 
         self.sender.as_ref().unwrap().send(job).unwrap();
     }
+
+    #[allow(dead_code)]
+    pub fn worker_count(&self) -> usize {
+    self.workers.len()
+}
+
 }
 
 impl Drop for ThreadPool {
