@@ -3,5 +3,5 @@
 version = 4
 
 [[package]]
-name = "relay-web-werver"
+name = "relay-web-server"
 version = "0.1.0"
