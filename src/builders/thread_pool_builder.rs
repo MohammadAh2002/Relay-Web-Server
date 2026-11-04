@@ -18,6 +18,9 @@ impl ThreadPool {
     pub fn new(size: usize) -> ThreadPool {
         assert!(size > 0, "Thread pool size must be greater than zero");
 
+        println!("Defining SERVER Threads...");
+
+
         let (sender, receiver) = mpsc::channel();
 
         let receiver = Arc::new(Mutex::new(receiver));
@@ -29,6 +32,8 @@ impl ThreadPool {
             workers.push(Worker::new(id, Arc::clone(&receiver)));
 
         }
+
+        println!("number of threads: {}", workers.len());
 
         ThreadPool { workers, sender: Some(sender),  }
 
