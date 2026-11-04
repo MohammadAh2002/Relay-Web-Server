@@ -1,5 +1,4 @@
-use relay_web_server::thread_pool;
-
+use relay_web_server::builders::thread_pool_builder::ThreadPool;
 
 #[cfg(test)]
 mod tests {
@@ -9,14 +8,14 @@ mod tests {
     #[should_panic(expected = "Thread pool size must be greater than zero")]
     fn define_thread_pool_number_zero(){
 
-        thread_pool::ThreadPool::new(0);
+        ThreadPool::new(0);
 
     }
     
     #[test]
     fn define_right_number_of_threads(){
 
-        let pool = thread_pool::ThreadPool::new(4);
+        let pool:ThreadPool = ThreadPool::new(4);
 
         assert_eq!(pool.worker_count(), 4);
 
