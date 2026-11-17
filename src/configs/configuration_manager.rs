@@ -1,18 +1,14 @@
 use std::collections::HashMap;
-use std::fs;
 use std::error::Error;
+use std::fs;
 
 pub struct ConfigurationManager {
-
-    configurations: HashMap<String, serde_json::Value>
-
+    configurations: HashMap<String, serde_json::Value>,
 }
 
 impl ConfigurationManager {
-
     pub fn new(config_file: Option<&str>) -> Result<Self, Box<dyn Error>> {
-       
-        let file: &str =config_file.unwrap_or("src/configs/DefaultConfigsFile.json");
+        let file: &str = config_file.unwrap_or("src/configs/DefaultConfigsFile.json");
 
         println!("Loading Server Configurations...");
 
@@ -20,13 +16,11 @@ impl ConfigurationManager {
 
         let configurations: HashMap<String, serde_json::Value> = serde_json::from_str(&contents)?;
 
-        let mut instance = Self {
-            configurations,
-        };
+        let mut instance = Self { configurations };
 
         instance.clean_configurations();
         instance.apply_configurations_defaults();
-        
+
         println!("Done Loading Server Configurations...");
 
         Ok(instance)
@@ -46,20 +40,18 @@ impl ConfigurationManager {
         self.configurations.get(key)
     }
 
-    pub fn clean_configurations(&mut self){
-
+    pub fn clean_configurations(&mut self) {
         let allowed_configs = ["host", "port"];
 
-        let invalid_keys: Vec<String> = self.configurations
-        .keys()
-        .filter(|key| !allowed_configs.contains(&key.as_str()))
-        .cloned()
-        .collect();
+        let invalid_keys: Vec<String> = self
+            .configurations
+            .keys()
+            .filter(|key| !allowed_configs.contains(&key.as_str()))
+            .cloned()
+            .collect();
 
         for key in invalid_keys {
             self.configurations.remove(&key);
         }
     }
-
-
 }

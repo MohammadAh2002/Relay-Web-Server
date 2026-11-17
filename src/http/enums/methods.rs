@@ -7,13 +7,12 @@ pub enum HttpMethod {
     PUT,
     DELETE,
     HEAD,
-    PATCH
+    PATCH,
 }
 
 use std::str::FromStr;
 
 impl FromStr for HttpMethod {
-
     type Err = HttpParsingErrors;
 
     fn from_str(value: &str) -> Result<Self, Self::Err> {

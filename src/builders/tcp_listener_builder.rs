@@ -1,17 +1,9 @@
-use std::{
-    net::{TcpListener},
-    error::Error,
-    net::Ipv4Addr
-};
+use std::{error::Error, net::Ipv4Addr, net::TcpListener};
 
-pub struct TcpListenerBuilder{
+pub struct TcpListenerBuilder {}
 
-}
-
-impl TcpListenerBuilder{
-    
-    pub fn build(host: &str, port: &str)-> Result<TcpListener, Box<dyn Error>>{
-
+impl TcpListenerBuilder {
+    pub fn build(host: &str, port: &str) -> Result<TcpListener, Box<dyn Error>> {
         if !Self::is_valid_host(host) {
             return Err("Invalid host".into());
         }
@@ -26,15 +18,13 @@ impl TcpListenerBuilder{
         println!("Server run: {}", listener.local_addr().unwrap());
 
         Ok(listener)
-        
     }
 
     fn is_valid_port(port: u16) -> bool {
         (1024..=65535).contains(&port) || port == 0
     }
-    
+
     fn is_valid_host(host: &str) -> bool {
         host.parse::<Ipv4Addr>().is_ok()
     }
-    
 }

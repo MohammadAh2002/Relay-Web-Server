@@ -1,8 +1,11 @@
-use std::{sync::{Arc, Mutex, mpsc}, thread};
+use std::{
+    sync::{Arc, Mutex, mpsc},
+    thread,
+};
 
-pub struct ThreadPool{
+pub struct ThreadPool {
     workers: Vec<Worker>,
-    sender: Option<mpsc::Sender<Job>>
+    sender: Option<mpsc::Sender<Job>>,
 }
 
 type Job = Box<dyn FnOnce() + Send + 'static>;
@@ -20,23 +23,22 @@ impl ThreadPool {
 
         println!("Defining SERVER Threads...");
 
-
         let (sender, receiver) = mpsc::channel();
 
         let receiver = Arc::new(Mutex::new(receiver));
-        
+
         let mut workers: Vec<Worker> = Vec::with_capacity(size);
 
         for id in 0..size {
-            
             workers.push(Worker::new(id, Arc::clone(&receiver)));
-
         }
 
         println!("number of threads: {}", workers.len());
 
-        ThreadPool { workers, sender: Some(sender),  }
-
+        ThreadPool {
+            workers,
+            sender: Some(sender),
+        }
     }
 
     pub fn execute<F>(&self, f: F)
@@ -50,25 +52,21 @@ impl ThreadPool {
 
     #[allow(dead_code)]
     pub fn worker_count(&self) -> usize {
-    self.workers.len()
-}
-
+        self.workers.len()
+    }
 }
 
 impl Drop for ThreadPool {
     fn drop(&mut self) {
-        
         drop(self.sender.take());
 
         for worker in self.workers.drain(..) {
-
             println!("Shutting down worker {}", worker.id);
 
             worker.thread.join().unwrap();
         }
     }
 }
-
 
 struct Worker {
     id: usize,
@@ -77,13 +75,11 @@ struct Worker {
 
 impl Worker {
     fn new(id: usize, receiver: Arc<Mutex<mpsc::Receiver<Job>>>) -> Worker {
-        
-       let thread = thread::spawn(move || {
+        let thread = thread::spawn(move || {
             loop {
-                
                 let message = receiver.lock().unwrap().recv();
 
-                 match message {
+                match message {
                     Ok(job) => {
                         println!("Worker {id} got a job; executing.");
 

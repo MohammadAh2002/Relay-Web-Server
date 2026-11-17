@@ -14,7 +14,10 @@ mod tests {
             .join("html_templates")
             .join("hello.html");
 
-        assert_eq!(result, expected, "the function did not return the same file");
+        assert_eq!(
+            result, expected,
+            "the function did not return the same file"
+        );
     }
 
     #[test]
@@ -26,7 +29,9 @@ mod tests {
             .join("html_templates")
             .join("hello.html");
 
-        assert_ne!(result, expected, "the function did not return the diffrenet files");
+        assert_ne!(
+            result, expected,
+            "the function did not return the diffrenet files"
+        );
     }
-
 }

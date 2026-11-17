@@ -1,9 +1,8 @@
-use thiserror::Error;
 use std::io;
+use thiserror::Error;
 
 #[derive(Error, Debug)]
 pub enum HttpParsingErrors {
-
     #[error("Invalid Request")]
     InvalidRequest,
 
