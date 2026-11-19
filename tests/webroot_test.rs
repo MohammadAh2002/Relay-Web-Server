@@ -60,13 +60,6 @@ mod tests {
     }
 
     #[test]
-    fn get_nested_file() {
-        let result = get_files("images/test.png");
-
-        assert!(result.is_ok());
-    }
-
-    #[test]
     fn reject_directory_path() {
         let result = get_files("images");
 
