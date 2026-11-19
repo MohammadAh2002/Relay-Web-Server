@@ -34,6 +34,10 @@ impl ConfigurationManager {
         self.configurations
             .entry("port".to_string())
             .or_insert(serde_json::json!("0"));
+
+       self.configurations
+            .entry("threads_number".to_string())
+            .or_insert(serde_json::json!(Self::get_default_threads_number()));
     }
 
     pub fn get_value(&self, key: &str) -> Option<&serde_json::Value> {
@@ -41,7 +45,7 @@ impl ConfigurationManager {
     }
 
     pub fn clean_configurations(&mut self) {
-        let allowed_configs = ["host", "port"];
+        let allowed_configs = ["host", "port", "threads_number"];
 
         let invalid_keys: Vec<String> = self
             .configurations
@@ -54,4 +58,12 @@ impl ConfigurationManager {
             self.configurations.remove(&key);
         }
     }
+
+    pub fn get_default_threads_number() -> usize {
+        std::thread::available_parallelism()
+            .map(|n| n.get())
+            .unwrap_or(5)
+    }
 }
+
+

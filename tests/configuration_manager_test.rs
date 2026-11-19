@@ -8,7 +8,8 @@ mod tests {
     fn parse_configurations() {
         let json = r#"{
             "host": "127.0.0.1",
-            "port": "8080"
+            "port": "8080",
+            "threads_number": 5
         }"#;
 
         let file = tempfile::NamedTempFile::new().unwrap();
@@ -41,6 +42,7 @@ mod tests {
         let json = r#"{
             "host": "127.0.0.1",
             "port": "8080",
+            "threads_number": 5,
             "ShoudBeDeleted": true
         }"#;
 
@@ -59,6 +61,9 @@ mod tests {
         assert!(instance.get_value("ShoudBeDeleted").is_none());
         assert!(instance.get_value("host").is_some());
         assert!(instance.get_value("port").is_some());
+        assert!(instance.get_value("threads_number").is_some());
+
+        assert_eq!(instance.get_value("threads_number").unwrap(), 5)
     }
 
     #[test]
@@ -77,5 +82,15 @@ mod tests {
             manager.get_value("host").unwrap(),
             &serde_json::json!("127.0.0.1")
         );
+
+        assert!(manager.get_value("threads_number").unwrap().as_u64().is_some());
+        
+    }
+
+    #[test]
+    fn test_get_default_threads_number() {
+        let result = ConfigurationManager::get_default_threads_number();
+
+        assert!(result > 0);
     }
 }
