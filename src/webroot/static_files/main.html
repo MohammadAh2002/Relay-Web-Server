@@ -1,0 +1,236 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Relay - A web server built from the wire up in Rust.">
+    <title>Relay | Built from the Wire Up</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 30px 20px;
+            background: #0b1120;
+            color: #e2e8f0;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 850px;
+        }
+
+        .top-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 90px;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: #f8fafc;
+        }
+
+        .status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #94a3b8;
+            font-size: 13px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #22c55e;
+            border-radius: 50%;
+        }
+
+        .hero {
+            text-align: center;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 7px 14px;
+            margin-bottom: 25px;
+            border: 1px solid #334155;
+            border-radius: 30px;
+            color: #38bdf8;
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-size: clamp(48px, 9vw, 82px);
+            font-weight: 800;
+            letter-spacing: -4px;
+            line-height: 1.1;
+            color: #f8fafc;
+        }
+
+        h1 span {
+            color: #38bdf8;
+        }
+
+        .subtitle {
+            margin-top: 18px;
+            color: #94a3b8;
+            font-size: 18px;
+            letter-spacing: 1px;
+        }
+
+        .description {
+            max-width: 620px;
+            margin: 35px auto;
+            color: #cbd5e1;
+            font-size: 16px;
+            line-height: 1.9;
+        }
+
+        .tech {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 30px 0 45px;
+        }
+
+        .tech span {
+            padding: 8px 15px;
+            border-radius: 6px;
+            background: #172033;
+            border: 1px solid #263449;
+            color: #94a3b8;
+            font-size: 13px;
+        }
+
+        .terminal {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 18px 22px;
+            border: 1px solid #263449;
+            border-radius: 10px;
+            background: #0f172a;
+            text-align: left;
+            font-family: monospace;
+            font-size: 13px;
+            line-height: 2;
+            color: #94a3b8;
+        }
+
+        .terminal .green {
+            color: #4ade80;
+        }
+
+        .terminal .blue {
+            color: #38bdf8;
+        }
+
+        footer {
+            margin-top: 90px;
+            padding-top: 25px;
+            border-top: 1px solid #1e293b;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+            color: #64748b;
+            font-size: 13px;
+        }
+
+        footer a {
+            color: #38bdf8;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: #7dd3fc;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            .top-bar {
+                margin-bottom: 65px;
+            }
+
+            h1 {
+                letter-spacing: -2px;
+            }
+
+            footer {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="container">
+
+        <header class="top-bar">
+            <div class="logo">RELAY<span style="color:#38bdf8">.</span></div>
+            <div class="status">
+                <span class="status-dot"></span>
+                Server is running
+            </div>
+        </header>
+
+        <section class="hero">
+            <div class="tag">A Rust Networking Project</div>
+
+            <h1>Built from<br>the <span>Wire Up.</span></h1>
+
+            <p class="subtitle">Meet Relay — A Web Server Written in Rust</p>
+
+            <p class="description">
+                Relay is a web server built from the ground up in Rust,
+                exploring the fundamentals of networking and HTTP.
+                From handling TCP connections to parsing HTTP requests,
+                this project is about understanding what happens behind
+                the scenes when a browser talks to a server.
+            </p>
+
+            <div class="tech">
+                <span>Rust</span>
+                <span>TCP</span>
+                <span>HTTP</span>
+                <span>Networking</span>
+                <span>Systems Programming</span>
+            </div>
+
+            <div class="terminal">
+                <div><span class="green">➜</span> relay-server</div>
+                <div><span class="blue">[INFO]</span> Initializing server...</div>
+                <div><span class="blue">[INFO]</span> Listening for connections</div>
+                <div><span class="green">[OK]</span> Ready to handle requests.</div>
+            </div>
+        </section>
+
+        <footer>
+            <span>Designed & built by Mohammad Ahmad</span>
+            <a href="https://mohammadah2002.github.io/My-Website/"
+               target="_blank" rel="noopener noreferrer">
+                Visit my portfolio ↗
+            </a>
+        </footer>
+
+    </main>
+</body>
+</html>
